@@ -1,0 +1,11 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+app/bin/main/MerchantsGuide/App.class
+app/bin/test/MerchantsGuide/AppTest.class
+gradle/wrapper/gradle-wrapper.properties
+gradle/wrapper/gradle-wrapper.jar
+app/bin/main/MerchantsGuide/RomanToDecConverter.class
+app/bin/test/MerchantsGuide/RomanToDecConverterTest.class
