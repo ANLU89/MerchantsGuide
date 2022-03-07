@@ -41,6 +41,20 @@ class RomanToDecConverterTest {
         assertEquals(1900, RomanToDecConverter.calculateDecValue("MCM"));
     }
     @Test
+    void validNumeralMMCM() throws Exception {
+        assertEquals(2900, RomanToDecConverter.calculateDecValue("MMCM"));
+    }
+    @Test
+    void validNumeralMMMCM() throws Exception {
+        assertEquals(3900, RomanToDecConverter.calculateDecValue("MMMCM"));
+    }
+    @Test
+    void invalidNumeralMMMMCM() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            RomanToDecConverter.calculateDecValue("MMMMCM");
+        });
+    }
+    @Test
     void validNumeralMCMXLIV() throws Exception {
         assertEquals(1944, RomanToDecConverter.calculateDecValue("MCMXLIV"));
     }
@@ -49,7 +63,78 @@ class RomanToDecConverterTest {
         assertEquals(3944, RomanToDecConverter.calculateDecValue("MMMCMXLIV"));
     }
     @Test
-    void invalidNumeralMCMCM() throws Exception {
-        assertEquals(-1, RomanToDecConverter.calculateDecValue("MCMCM"));
+    void invalidNumeralCMM() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            RomanToDecConverter.calculateDecValue("CMM");
+        });
     }
+    @Test
+    void invalidNumeralMCMCM() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            RomanToDecConverter.calculateDecValue("MCMCM");
+        });
+    }
+    @Test
+    void invalidNumeralMCMXCXL() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            RomanToDecConverter.calculateDecValue("MCMXCXL");
+        });
+    }  
+    @Test
+    void invalidNumeralIXIV() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            RomanToDecConverter.calculateDecValue("IXIV");
+        });
+    } 
+    @Test
+    void invalidNumeralIVIX() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            RomanToDecConverter.calculateDecValue("IVIX");
+        });
+    }
+    @Test
+    void invalidNumeralXXXM() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            RomanToDecConverter.calculateDecValue("XXXM");
+        });
+    }
+    @Test
+    void invalidNumeralXXC() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            RomanToDecConverter.calculateDecValue("XXC");
+        });
+    }
+    @Test
+    void invalidNumeralXXXC() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            RomanToDecConverter.calculateDecValue("XXXC");
+        });
+    }
+    @Test
+    void validNumeralMMMCMXLIX() throws Exception {
+        assertEquals(3949, RomanToDecConverter.calculateDecValue("MMMCMXLIX"));
+    }
+    @Test
+    void validNumeralMMMCDXLIX() throws Exception {
+        assertEquals(3449, RomanToDecConverter.calculateDecValue("MMMCDXLIX"));
+    }
+    @Test
+    void invalidNumeralMMMCDXCXL() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            RomanToDecConverter.calculateDecValue("MMMCDXCXL");
+        });
+    }
+    @Test
+    void invalidNumeralXXMM() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            RomanToDecConverter.calculateDecValue("XXMM");
+        });
+    }
+    @Test
+    void invalidNumeralCXCXL() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            RomanToDecConverter.calculateDecValue("CXCXL");
+        });
+    }
+    
 }
