@@ -4,136 +4,145 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RomanToDecConverterTest {
+
+    RomanToDecConverter converter = new RomanToDecConverter();
     @Test 
     void invalidRepeatofV() {
-        assertFalse(RomanToDecConverter.isValidRepeat('V'));
+
+        assertFalse(converter.isValidRepeat('V'));
     }
     @Test 
     void validRepeatofC() {
-        assertTrue(RomanToDecConverter.isValidRepeat('C'));
+        assertTrue(converter.isValidRepeat('C'));
     }
     @Test 
     void invalidCharacterlH() {
-        assertFalse(RomanToDecConverter.isValidCharacter('H'));
+        assertFalse(converter.isValidCharacter('H'));
     }
     @Test
     void validCharacterX() {
-        assertTrue(RomanToDecConverter.isValidCharacter('X'));
+        assertTrue(converter.isValidCharacter('X'));
     }
     @Test
     void validNumeralIV() throws Exception {
-        assertEquals(4, RomanToDecConverter.calculateDecValue("IV"));
+        assertEquals(4, converter.calculateDecValue("IV"));
     }
     @Test
     void validNumeralMIX() throws Exception {
-        assertEquals(1009, RomanToDecConverter.calculateDecValue("MIX"));
+        assertEquals(1009, converter.calculateDecValue("MIX"));
     }
     @Test
     void validNumeralMMM() throws Exception {
-        assertEquals(3000, RomanToDecConverter.calculateDecValue("MMM"));
+        assertEquals(3000, converter.calculateDecValue("MMM"));
     }
     @Test
     void validNumeralCM() throws Exception {
-        assertEquals(900, RomanToDecConverter.calculateDecValue("CM"));
+        assertEquals(900, converter.calculateDecValue("CM"));
     }
     @Test
     void validNumeralMCM() throws Exception {
-        assertEquals(1900, RomanToDecConverter.calculateDecValue("MCM"));
+        assertEquals(1900, converter.calculateDecValue("MCM"));
     }
     @Test
     void validNumeralMMCM() throws Exception {
-        assertEquals(2900, RomanToDecConverter.calculateDecValue("MMCM"));
+        assertEquals(2900, converter.calculateDecValue("MMCM"));
     }
     @Test
     void validNumeralMMMCM() throws Exception {
-        assertEquals(3900, RomanToDecConverter.calculateDecValue("MMMCM"));
+        assertEquals(3900, converter.calculateDecValue("MMMCM"));
     }
     @Test
     void invalidNumeralMMMMCM() throws Exception {
         Exception exception = assertThrows(Exception.class, () -> {
-            RomanToDecConverter.calculateDecValue("MMMMCM");
+            converter.calculateDecValue("MMMMCM");
         });
     }
     @Test
     void validNumeralMCMXLIV() throws Exception {
-        assertEquals(1944, RomanToDecConverter.calculateDecValue("MCMXLIV"));
+        assertEquals(1944, converter.calculateDecValue("MCMXLIV"));
     }
     @Test
     void validNumeralMMMCMXLIV() throws Exception {
-        assertEquals(3944, RomanToDecConverter.calculateDecValue("MMMCMXLIV"));
+        assertEquals(3944, converter.calculateDecValue("MMMCMXLIV"));
     }
     @Test
     void invalidNumeralCMM() throws Exception {
         Exception exception = assertThrows(Exception.class, () -> {
-            RomanToDecConverter.calculateDecValue("CMM");
+            converter.calculateDecValue("CMM");
         });
     }
     @Test
     void invalidNumeralMCMCM() throws Exception {
         Exception exception = assertThrows(Exception.class, () -> {
-            RomanToDecConverter.calculateDecValue("MCMCM");
+            converter.calculateDecValue("MCMCM");
         });
     }
     @Test
     void invalidNumeralMCMXCXL() throws Exception {
         Exception exception = assertThrows(Exception.class, () -> {
-            RomanToDecConverter.calculateDecValue("MCMXCXL");
+            converter.calculateDecValue("MCMXCXL");
         });
     }  
     @Test
     void invalidNumeralIXIV() throws Exception {
         Exception exception = assertThrows(Exception.class, () -> {
-            RomanToDecConverter.calculateDecValue("IXIV");
+            converter.calculateDecValue("IXIV");
         });
     } 
     @Test
     void invalidNumeralIVIX() throws Exception {
         Exception exception = assertThrows(Exception.class, () -> {
-            RomanToDecConverter.calculateDecValue("IVIX");
+            converter.calculateDecValue("IVIX");
         });
     }
     @Test
     void invalidNumeralXXXM() throws Exception {
         Exception exception = assertThrows(Exception.class, () -> {
-            RomanToDecConverter.calculateDecValue("XXXM");
+            converter.calculateDecValue("XXXM");
         });
     }
     @Test
     void invalidNumeralXXC() throws Exception {
         Exception exception = assertThrows(Exception.class, () -> {
-            RomanToDecConverter.calculateDecValue("XXC");
+            converter.calculateDecValue("XXC");
         });
     }
     @Test
     void invalidNumeralXXXC() throws Exception {
         Exception exception = assertThrows(Exception.class, () -> {
-            RomanToDecConverter.calculateDecValue("XXXC");
+            converter.calculateDecValue("XXXC");
         });
     }
     @Test
     void validNumeralMMMCMXLIX() throws Exception {
-        assertEquals(3949, RomanToDecConverter.calculateDecValue("MMMCMXLIX"));
+        assertEquals(3949, converter.calculateDecValue("MMMCMXLIX"));
     }
     @Test
     void validNumeralMMMCDXLIX() throws Exception {
-        assertEquals(3449, RomanToDecConverter.calculateDecValue("MMMCDXLIX"));
+        assertEquals(3449, converter.calculateDecValue("MMMCDXLIX"));
     }
     @Test
     void invalidNumeralMMMCDXCXL() throws Exception {
         Exception exception = assertThrows(Exception.class, () -> {
-            RomanToDecConverter.calculateDecValue("MMMCDXCXL");
+            converter.calculateDecValue("MMMCDXCXL");
         });
     }
     @Test
     void invalidNumeralXXMM() throws Exception {
         Exception exception = assertThrows(Exception.class, () -> {
-            RomanToDecConverter.calculateDecValue("XXMM");
+            converter.calculateDecValue("XXMM");
         });
     }
     @Test
     void invalidNumeralCXCXL() throws Exception {
         Exception exception = assertThrows(Exception.class, () -> {
-            RomanToDecConverter.calculateDecValue("CXCXL");
+            converter.calculateDecValue("CXCXL");
+        });
+    }
+    @Test
+    void invalidNumeralCXCXC() throws Exception {
+        Exception exception = assertThrows(Exception.class, () -> {
+            converter.calculateDecValue("CXCXC");
         });
     }
     

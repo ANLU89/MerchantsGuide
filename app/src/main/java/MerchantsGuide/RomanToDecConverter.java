@@ -4,38 +4,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+/**
+ * This class is supposed to validate and calculate the value of roman numerals.
+ */
 public class RomanToDecConverter {
+
+    public RomanToDecConverter(){
+    }
+
     /**
-     * This class is supposed to validate and calculate the value of roman numerals.
-     * @return
+     * maps the Roman numerals to their values
      */
-    
-
-
     private static HashMap<Character, Integer> symbols(){
 
-        /**
-         * Binds the Roman numerals to their values
-         */
-
-
         HashMap<Character, Integer> symbolsMap = new HashMap<Character, Integer>();
-            symbolsMap.put('I', 1);
-            symbolsMap.put('V', 5);
-            symbolsMap.put('X', 10);
-            symbolsMap.put('L', 50);
-            symbolsMap.put('C', 100);
-            symbolsMap.put('D', 500);
-            symbolsMap.put('M', 1000);
+
+        symbolsMap.put('I', 1);
+        symbolsMap.put('V', 5);
+        symbolsMap.put('X', 10);
+        symbolsMap.put('L', 50);
+        symbolsMap.put('C', 100);
+        symbolsMap.put('D', 500);
+        symbolsMap.put('M', 1000);
+
         return symbolsMap;
     }
 
-
+    /**
+     * defines the permitted subtractions when calculating the value of a given numeral.
+     */
     private static HashMap<Character, HashSet<Character>> validSubtractions(){
-
-        /**
-         * Defines the permitted subtractions when calculating the value of a given numeral.
-         */
 
         HashMap<Character, HashSet<Character>> vSubs = new HashMap<Character, HashSet<Character>>();
 
@@ -58,38 +56,41 @@ public class RomanToDecConverter {
     }
 
 
+    /**
+     * defines which symbols may be repeated in a numeral
+     */
     private static HashSet<Character> validRepeats(){
 
-        /**
-         * Defines which symbols may be repeated in a numeral
-         */
-
         HashSet<Character> r = new HashSet<Character>();
+
         r.add('I');
         r.add('X');
         r.add('C');
         r.add('M');
+
         return r;
     }
 
 
-    public static boolean isValidCharacter(char c){
+    public boolean isValidCharacter(char c){
         return symbols().containsKey(c);
     }
 
-    public static boolean isValidSubtraction(char first, char second){
+    public boolean isValidSubtraction(char first, char second){
         return validSubtractions().get(first).contains(second);
     }
 
-    public static boolean isValidRepeat(char c){
+    public boolean isValidRepeat(char c){
         return validRepeats().contains(c);
     }
 
-    public static int calculateDecValue(String numeral) throws Exception{
 
-        /**
-         * Calculates the decimal value of a given numeral or throws an exception if given numeral is invalid.
-         */
+    /**
+     * Calculates the decimal value of a given numeral or throws an exception if the numeral is invalid.
+     * @param numeral
+     * @throws Execption
+     */
+    public int calculateDecValue(String numeral) throws Exception{
 
         ArrayList<Character> chars = new ArrayList<Character>();
         
