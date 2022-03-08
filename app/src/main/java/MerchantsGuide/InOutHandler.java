@@ -6,9 +6,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class handles the input either passed as a textfile or by single line input.
+ */
+
+
 public class InOutHandler {
 
-    private static HashMap<String, Double> valuePerUnitMap = new HashMap<String, Double>();
+    private static HashMap<String, Integer> valuePerUnitMap = new HashMap<String, Integer>();
     private static HashMap<String, Character> romanSymbolMap = new HashMap<String, Character>();
     private static String ERROR = "I have no idea what you are talking about";
     
@@ -16,14 +21,12 @@ public class InOutHandler {
 
     }
 
-    public void read(String fileName) throws Exception{
+    public void handleFile(String fileName){
         try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
-            String out;
             while((line = br.readLine()) != null)
             {
-                out = handleLine(line.trim());
-                if (out != null) System.out.println(out);
+                handleLine(line);
             }
 
         } catch (IOException e) {
@@ -31,24 +34,29 @@ public class InOutHandler {
         } 
     }
 
-    public String handleLine(String line) throws Exception{
-        String[] words = line.split("\\s+");
-        if(line.startsWith("how much is")){
-            return answerQuestion(words, false);
-        }
-        else if (line.startsWith("how many Credits is")){
-            return answerQuestion(words, true);
-        }
-        else if (line.contains("is")){
+    public void handleLine(String line){
+        String out = processLine(line);
+        if (out != null) System.out.println(out);
+    }
 
-            if (line.contains("Credits")){
-                mapUnitToValue(words);
+    public String processLine(String line){
+        String trimLine = line.trim();
+        String[] words = trimLine.split("\\s+");
+        if(trimLine.endsWith("?")){
+            if(trimLine.startsWith("how much is")){
+                return answerQuestion(words, false);
+            }
+            else if (trimLine.startsWith("how many Credits is")){
+                return answerQuestion(words, true);
+            }
+        }
+        else if (trimLine.contains("is")){
+            if (trimLine.contains("Credits")){
+                return mapUnitToValue(words);
             }
             else {
-                if (words.length != 3) return ERROR;
-                mapWordToSymbol(words);
+                return mapWordToSymbol(words);
             }
-            return null;
         }
         return ERROR;
     }
@@ -62,7 +70,7 @@ public class InOutHandler {
         return numeral;
     }
 
-    private String answerQuestion(String[] words, boolean credits) throws Exception{
+    private String answerQuestion(String[] words, boolean credits){
         RomanToDecConverter converter = new RomanToDecConverter();
         String numeral, unit;
         int value, trim = 0;
@@ -77,7 +85,12 @@ public class InOutHandler {
         
         numeral = convertWordsToNumeral(wordsToBeConverted);
         if (numeral == null) return ERROR;
-        value = converter.calculateDecValue(numeral);
+        try {
+            value = converter.calculateDecValue(numeral);
+        }
+        catch(Exception e){
+            return ERROR;
+        }
 
         if (credits){
             unit = words[words.length - 2];
@@ -89,27 +102,35 @@ public class InOutHandler {
         return out;
     }
 
-    private void mapWordToSymbol(String[] words){
+    private String mapWordToSymbol(String[] words){
+        if (words.length != 3) return ERROR;
+        RomanToDecConverter converter = new RomanToDecConverter();
         String word = words[0];
         char symbol = words[2].charAt(0);
+        if (!converter.isValidCharacter(symbol)) return ERROR;
         romanSymbolMap.put(word, symbol);
-        
+        return null;
     }
 
-    private void mapUnitToValue(String[] words) throws Exception{
+    private String mapUnitToValue(String[] words){
         RomanToDecConverter converter = new RomanToDecConverter();
         ArrayList<String> wordsToBeConverted = new ArrayList<String>();
         String word = words[words.length - 4];
         String numeral;
-        int amount;
-        // @TODO exception handling fürs parsing
-        double value = Double.parseDouble(words[words.length - 2]);
+        int amount, value;
+
         for (int i = 0; i < words.length - 4; i++){
             wordsToBeConverted.add(words[i]);
         }
         numeral = convertWordsToNumeral(wordsToBeConverted);
-        amount = converter.calculateDecValue(numeral);
-        valuePerUnitMap.put(word, value / amount);
-
+        try{
+            amount = converter.calculateDecValue(numeral);
+            value = Integer.parseInt(words[words.length - 2]);
+        }
+        catch(Exception e){
+            return ERROR;
+        }
+        valuePerUnitMap.put(word, (value / amount));
+        return null;
     }
 }
