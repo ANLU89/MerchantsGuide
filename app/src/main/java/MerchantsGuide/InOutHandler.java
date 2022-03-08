@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * This class handles the input either passed as a textfile or by single line input.
+ * This class processes the input either passed as a textfile or by single line input and prints the results.
  */
 
 
@@ -21,24 +21,36 @@ public class InOutHandler {
 
     }
 
-    public void handleFile(String fileName){
-        try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+    /**
+     * gets passed a file path and passes each single line to the handleLine method
+     * @param file
+     */
+    public void handleFile(String file){
+        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while((line = br.readLine()) != null)
             {
                 handleLine(line);
             }
-
         } catch (IOException e) {
             System.out.println("File not found! " + e);
         } 
     }
 
+    /**
+     * gets passed a single line command, passes it to the processLine method and prints the result
+     * @param line
+     */
     public void handleLine(String line){
         String out = processLine(line);
         if (out != null) System.out.println(out);
     }
 
+    /**
+     * gets passed a single line, determines which type of command it is and calls the associated method
+     * @param line
+     * @return
+     */
     public String processLine(String line){
         String trimLine = line.trim();
         String[] words = trimLine.split("\\s+");
@@ -61,6 +73,11 @@ public class InOutHandler {
         return ERROR;
     }
 
+    /**
+     * converts a sequence of intergalactic words to the corresponding roman numeral
+     * @param words
+     * @return
+     */
     private String convertWordsToNumeral(ArrayList<String> words){
         String numeral = "";
         for (String word : words){
@@ -70,6 +87,13 @@ public class InOutHandler {
         return numeral;
     }
 
+    /**
+     * either calculates the decimal representation of a sequence of intergalactic words
+     * or the value in Credits of a material unit where the amount is given by a sequence of intergalactic words
+     * @param words
+     * @param credits
+     * @return
+     */
     private String answerQuestion(String[] words, boolean credits){
         RomanToDecConverter converter = new RomanToDecConverter();
         String numeral, unit;
@@ -102,6 +126,11 @@ public class InOutHandler {
         return out;
     }
 
+    /**
+     * maps a intergalactic word to a roman symbol
+     * @param words
+     * @return
+     */
     private String mapWordToSymbol(String[] words){
         if (words.length != 3) return ERROR;
         RomanToDecConverter converter = new RomanToDecConverter();
@@ -112,6 +141,11 @@ public class InOutHandler {
         return null;
     }
 
+    /**
+     * maps a material unit to it's per-unit value
+     * @param words
+     * @return
+     */
     private String mapUnitToValue(String[] words){
         RomanToDecConverter converter = new RomanToDecConverter();
         ArrayList<String> wordsToBeConverted = new ArrayList<String>();

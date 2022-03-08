@@ -19,11 +19,10 @@ public class App {
                 inOut.handleFile(file);
             }
             else {
+                String line;
                 Scanner scan = new Scanner(System.in);
-                while (true) {
-                    String test = scan.nextLine();
-                    if (test.equals("")) break;
-                    inOut.handleLine(test);
+                while (!(line = scan.nextLine()).equals("")) {
+                    inOut.handleLine(line);
                 }
                 scan.close();
             }
