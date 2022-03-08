@@ -6,6 +6,17 @@ package MerchantsGuide;
 public class App {
 
     public static void main(String[] args) {
+        
+        String fileName = "C:/Users/flea1/OneDrive/Dokumente/GitHub/MerchantsGuide/app/bin/main/MerchantsGuide/input.txt";
+        if (args.length != 0)
+            fileName = args[0];
+        try{
+            InOutHandler inOut = new InOutHandler();
+            inOut.read(fileName);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
 
     }
 }

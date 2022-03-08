@@ -9,3 +9,8 @@ gradle/wrapper/gradle-wrapper.properties
 gradle/wrapper/gradle-wrapper.jar
 app/bin/main/MerchantsGuide/RomanToDecConverter.class
 app/bin/test/MerchantsGuide/RomanToDecConverterTest.class
+app/bin/test/MerchantsGuide/InOutHandlerTest.class
+.gitignore
+app/bin/main/MerchantsGuide/InOutHandler.class
+app/src/main/java/MerchantsGuide/input.txt
+app/bin/main/MerchantsGuide/input.txt
