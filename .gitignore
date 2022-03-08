@@ -14,3 +14,6 @@ app/bin/test/MerchantsGuide/InOutHandlerTest.class
 app/bin/main/MerchantsGuide/InOutHandler.class
 app/src/main/java/MerchantsGuide/input.txt
 app/bin/main/MerchantsGuide/input.txt
+.vscode/settings.json
+.vscode/settings.json
+.gitignore
